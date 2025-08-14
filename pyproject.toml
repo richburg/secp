@@ -1,0 +1,7 @@
+[project]
+name = "secp"
+version = "1.0.2"
+description = "Asynchronous and concurrent chatting server using my custom protocol SECP"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = []
