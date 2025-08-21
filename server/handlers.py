@@ -1,6 +1,7 @@
 import asyncio
 import logging
 
+from server.config import ADMIN_IPS
 from server.helpers import (
     Message,
     broadcast_message,
@@ -32,9 +33,7 @@ async def handle_identify(writer: asyncio.StreamWriter, message: Message):
         return
 
     ip: str = writer.get_extra_info("peername")[0]
-    clients[writer] = Client(
-        nickname, writer, admin=True if nickname == "admin" else False
-    )
+    clients[writer] = Client(nickname, writer, admin=True if ip in ADMIN_IPS else False)
 
     logging.debug(f"{ip} {clients[writer]}")
     await broadcast_message(f"USER_JOIN|{nickname}")
